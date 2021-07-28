@@ -1,4 +1,4 @@
-import {api} from '../utils/axios';
+import {api, source} from '../utils/axios';
 
 type ClienteProps = {
   nome: string;
@@ -43,6 +43,20 @@ class Cliente {
       })
       .catch(function (error) {
         console.log(error);
+        return null;
+      });
+  }
+
+  async getAllClientes() {
+    return api
+      .get('/clientes', {
+        cancelToken: source.token,
+      })
+      .then(async response => {
+        return response.data;
+      })
+      .catch(() => {
+        console.log('Deu ruim');
         return null;
       });
   }

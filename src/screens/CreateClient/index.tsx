@@ -15,7 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootDrawerParamList} from '../../routes';
 import Header from '../../components/Header';
-import {Container} from './styles';
+import {Container} from '../../style/Container';
 
 export const CreateClient = () => {
   const navigation = useNavigation() as DrawerNavigationProp<
