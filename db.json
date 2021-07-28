@@ -1,0 +1,24 @@
+{
+  "usuarios": [
+    {
+      "email": "teste@emaill.com.br",
+      "password": "123456"
+    }
+  ],
+  "clientes": [
+    {
+      "nome": "Lucas Vieira Urquiza",
+      "cpf": "047.974.151-42",
+      "email": "urquizaxd@gmail.com",
+      "endereco": {
+        "cep": "75470-000",
+        "rua": "Avenida Otilia Amorim Rodrigues",
+        "numero": "S/N",
+        "bairro": "Setor Dim Dim",
+        "cidade": "Nova Veneza",
+        "uf": "GO"
+      },
+      "id": 1
+    }
+  ]
+}
