@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootDrawerParamList} from '../../routes';
 import Header from '../../components/Header';
 import {Container} from '../../style/Container';
-import {DataTable} from 'react-native-paper';
-import {useEffect} from 'react';
+import {Table} from '../../components/Table';
 import Cliente from '../../api/Cliente';
 
-type ResponseProps = {
+export type ResponseProps = {
   nome: string;
   cpf: string;
   email: string;
@@ -21,10 +20,12 @@ type ResponseProps = {
     cidade: string;
     uf: string;
   };
+  id: number;
 };
 
 export const ListClients = () => {
   const [loadClientes, setLoadClientes] = useState([]);
+  const isFocused = useIsFocused();
 
   const navigation = useNavigation() as DrawerNavigationProp<
     RootDrawerParamList,
@@ -37,7 +38,7 @@ export const ListClients = () => {
       setLoadClientes(response);
     };
     fetchAllCliente();
-  }, []);
+  }, [isFocused]);
 
   return (
     <SafeAreaView>
@@ -48,23 +49,7 @@ export const ListClients = () => {
             onPress={() => navigation.openDrawer()}
           />
           <View style={styles.viewStyled}>
-            <DataTable>
-              <DataTable.Header>
-                <DataTable.Title>Nome</DataTable.Title>
-                <DataTable.Title>CPF</DataTable.Title>
-                <DataTable.Title>Email</DataTable.Title>
-                <DataTable.Title>Cidade</DataTable.Title>
-              </DataTable.Header>
-
-              {loadClientes.map((cliente: ResponseProps) => {
-                <DataTable.Row>
-                  <DataTable.Cell>{cliente.nome}</DataTable.Cell>
-                  <DataTable.Cell>{cliente.cpf}</DataTable.Cell>
-                  <DataTable.Cell>{cliente.email}</DataTable.Cell>
-                  <DataTable.Cell>{cliente.endereco.cidade}</DataTable.Cell>
-                </DataTable.Row>;
-              })}
-            </DataTable>
+            <Table listClients={loadClientes} />
           </View>
         </Container>
       </ScrollView>

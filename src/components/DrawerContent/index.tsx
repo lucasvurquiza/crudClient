@@ -1,16 +1,7 @@
 import React from 'react';
-// import {View} from 'react-native';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {MenuItem} from '../MenuItem';
-import {
-  Container,
-  // NameUser,
-  // TitleUser,
-  Body,
-  Footer,
-  // Logo,
-  // HeaderBody,
-} from './styles';
+import {Container, Body, Footer} from './styles';
 
 export const DrawerContent = (
   props: DrawerContentComponentProps,
@@ -26,13 +17,6 @@ export const DrawerContent = (
   return (
     <Container>
       <Body>
-        {/* <HeaderBody>
-          <View>
-            <Logo size={50} name="account-circle" />
-          </View>
-          <NameUser>Ednilson</NameUser>
-          <TitleUser>Desenvolvedor</TitleUser>
-        </HeaderBody> */}
         {menuItems.map(item => (
           <MenuItem
             stack={props}

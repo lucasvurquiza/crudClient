@@ -19,6 +19,48 @@
         "uf": "GO"
       },
       "id": 1
+    },
+    {
+      "nome": "Luciene Aparecida Vieira Urquiza",
+      "cpf": "577.049.451-49",
+      "email": "lucieneurquiza@gmail.com",
+      "endereco": {
+        "cep": "77410-420",
+        "rua": "Rua 21-C",
+        "numero": "265",
+        "bairro": "Alto dos Buritis",
+        "cidade": "Gurupi",
+        "uf": "TO"
+      },
+      "id": 2
+    },
+    {
+      "nome": "Fabricio de Oliveira Urquiza",
+      "cpf": "151.051.987-87",
+      "email": "fabriciourquiza@gmail.com",
+      "endereco": {
+        "cep": "51300-390",
+        "rua": "Rua Padre Romeu Peréa",
+        "numero": "001",
+        "bairro": "COHAB",
+        "cidade": "Recife",
+        "uf": "PE"
+      },
+      "id": 3
+    },
+    {
+      "nome": "Arthur Vieira Urquiza",
+      "cpf": "854.987.150-98",
+      "email": "arthururquiza@gmail.com",
+      "endereco": {
+        "cep": "69088-494",
+        "rua": "Rua Rômulo",
+        "numero": "S/N",
+        "bairro": "Jorge Teixeira",
+        "cidade": "Manaus",
+        "uf": "AM"
+      },
+      "id": 4
     }
   ]
 }
