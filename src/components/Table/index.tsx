@@ -8,6 +8,7 @@ type Props = {
 
 export const Table = (props: Props) => {
   const {listClients} = props;
+
   return (
     <DataTable>
       <DataTable.Header>
@@ -18,7 +19,7 @@ export const Table = (props: Props) => {
       </DataTable.Header>
 
       {listClients.map((client: ResponseProps) => (
-        <DataTable.Row key={client.id}>
+        <DataTable.Row onPress={() => console.log(client.id)} key={client.id}>
           <DataTable.Cell>{client.nome}</DataTable.Cell>
           <DataTable.Cell>{client.cpf}</DataTable.Cell>
           <DataTable.Cell>{client.email}</DataTable.Cell>

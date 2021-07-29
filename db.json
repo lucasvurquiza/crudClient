@@ -61,6 +61,34 @@
         "uf": "AM"
       },
       "id": 4
+    },
+    {
+      "nome": "Maria Clara Stival Motão",
+      "cpf": "047.652.974-89",
+      "email": "mariaclara@gmail.com",
+      "endereco": {
+        "cep": "77410-370",
+        "rua": "Rua 19-A",
+        "numero": "965",
+        "bairro": "Alto dos Buritis",
+        "cidade": "Gurupi",
+        "uf": "TO"
+      },
+      "id": 5
+    },
+    {
+      "nome": "João Pedro Petigru",
+      "cpf": "254.987.321-02",
+      "email": "joaopedro@petigru.com",
+      "endereco": {
+        "cep": "75470-000",
+        "rua": "Berlindo Morais",
+        "numero": "S/N",
+        "bairro": "Setor Sul",
+        "cidade": "Nova Veneza",
+        "uf": "GO"
+      },
+      "id": 6
     }
   ]
 }

@@ -13,8 +13,9 @@ import Cliente from '../../api/Cliente';
 
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {TextInputMask} from 'react-native-masked-text';
 import {RootDrawerParamList} from '../../routes';
-import Header from '../../components/Header';
+import {Header} from '../../components/Header';
 import {Container} from '../../style/Container';
 
 export const CreateClient = () => {
@@ -53,6 +54,18 @@ export const CreateClient = () => {
     }
   }
 
+  const clearForm = () => {
+    setNome('');
+    setCpf('');
+    setEmail('');
+    setCep('');
+    setRua('');
+    setNumero('');
+    setBairro('');
+    setCidade('');
+    setUf('');
+  };
+
   const handleSubmit = async () => {
     await Cliente.createCliente({
       nome,
@@ -65,6 +78,7 @@ export const CreateClient = () => {
       cidade,
       uf,
     });
+    clearForm();
   };
 
   return (
@@ -82,7 +96,8 @@ export const CreateClient = () => {
             value={nome}
           />
           <Text style={styles.textStyled}>CPF: </Text>
-          <TextInput
+          <TextInputMask
+            type={'cpf'}
             style={styles.inputStyled}
             onChangeText={setCpf}
             value={cpf}
@@ -94,7 +109,8 @@ export const CreateClient = () => {
             value={email}
           />
           <Text style={styles.textStyled}>CEP: </Text>
-          <TextInput
+          <TextInputMask
+            type={'zip-code'}
             style={styles.inputStyled}
             onChangeText={setCep}
             value={cep}

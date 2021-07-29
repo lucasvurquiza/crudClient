@@ -60,6 +60,20 @@ class Cliente {
         return null;
       });
   }
+
+  async getAllClientesName(name: string) {
+    return api
+      .get(`/clientes?q=${name}`, {
+        cancelToken: source.token,
+      })
+      .then(async response => {
+        return response.data;
+      })
+      .catch(() => {
+        console.log('Deu ruim');
+        return null;
+      });
+  }
 }
 
 export default new Cliente();

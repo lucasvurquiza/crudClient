@@ -6,7 +6,7 @@ interface HeaderProps {
   onPress(): void;
 }
 
-const Header: React.FC<HeaderProps> = ({title, onPress}) => {
+export const Header: React.FC<HeaderProps> = ({title, onPress}) => {
   return (
     <Container>
       <Icon size={25} name="menu" onPress={onPress} />
@@ -14,5 +14,3 @@ const Header: React.FC<HeaderProps> = ({title, onPress}) => {
     </Container>
   );
 };
-
-export default Header;

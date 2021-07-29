@@ -3,10 +3,11 @@ import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootDrawerParamList} from '../../routes';
-import Header from '../../components/Header';
-import {Container} from '../../style/Container';
+import {Header} from '../../components/Header';
 import {Table} from '../../components/Table';
 import Cliente from '../../api/Cliente';
+import {Container} from '../../style/Container';
+import {Searchbar} from 'react-native-paper';
 
 export type ResponseProps = {
   nome: string;
@@ -25,6 +26,8 @@ export type ResponseProps = {
 
 export const ListClients = () => {
   const [loadClientes, setLoadClientes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
   const isFocused = useIsFocused();
 
   const navigation = useNavigation() as DrawerNavigationProp<
@@ -40,6 +43,11 @@ export const ListClients = () => {
     fetchAllCliente();
   }, [isFocused]);
 
+  const searchWithName = async () => {
+    const response = await Cliente.getAllClientesName(searchQuery);
+    setLoadClientes(response);
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -49,6 +57,12 @@ export const ListClients = () => {
             onPress={() => navigation.openDrawer()}
           />
           <View style={styles.viewStyled}>
+            <Searchbar
+              placeholder="Search"
+              onChangeText={query => setSearchQuery(query)}
+              onEndEditing={() => searchWithName()}
+              value={searchQuery}
+            />
             <Table listClients={loadClientes} />
           </View>
         </Container>
@@ -58,24 +72,6 @@ export const ListClients = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 18,
-    paddingTop: 35,
-    backgroundColor: '#ffffff',
-  },
-  HeadStyle: {
-    height: 50,
-    alignContent: 'center',
-    backgroundColor: '#ffe0f0',
-  },
-  TableText: {
-    textAlign: 'center',
-  },
-  TableBorder: {
-    borderWidth: 1,
-    borderColor: '#ffa1d2',
-  },
   viewStyled: {
     marginLeft: 5,
     marginRight: 5,
