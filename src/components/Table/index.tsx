@@ -76,7 +76,14 @@ export const Table = (props: Props) => {
                 size={20}
                 color="#000"
                 backgroundColor={'transparent'}
-                onPress={() => navigation.navigate('CreateClient', {client})}
+                onPress={() => {
+                  navigation.reset({
+                    index: 0,
+                    routes: [
+                      {name: 'CreateClient', params: {editClient: client}},
+                    ],
+                  });
+                }}
               />
             }
           </DataTable.Cell>

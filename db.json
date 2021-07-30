@@ -19,20 +19,6 @@
         "uf": "TO"
       },
       "id": 5
-    },
-    {
-      "nome": "Marcos Paulo Mariano",
-      "cpf": "542.398.103-24",
-      "email": "marcospaulo@mariano.com",
-      "endereco": {
-        "cep": "57022-160",
-        "rua": "Praça Dois Leões",
-        "numero": "965",
-        "bairro": "Jaraguá",
-        "cidade": "Maceió",
-        "uf": "AL"
-      },
-      "id": 7
     }
   ]
 }

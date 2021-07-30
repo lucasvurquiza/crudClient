@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {useCallback, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -12,7 +13,10 @@ import Cep from '../../api/Cep';
 import Cliente from '../../api/Cliente';
 
 import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {
+  DrawerNavigationProp,
+  DrawerScreenProps,
+} from '@react-navigation/drawer';
 import {TextInputMask} from 'react-native-masked-text';
 import {RootDrawerParamList} from '../../routes';
 import {Header} from '../../components/Header';
@@ -20,37 +24,48 @@ import {Container} from '../../style/Container';
 import {showToastWithGravity} from '../../utils/notifications/showToast';
 import {isEmail} from '../../utils/validates/emailValidation';
 import {ResponseProps} from '../ListClients';
+import {useRef} from 'react';
 
-export const CreateClient = (editClient: ResponseProps) => {
+type RootStackParamList = {
+  ClientDetails: {editClient: ResponseProps};
+};
+
+type Props = DrawerScreenProps<RootStackParamList, 'ClientDetails'>;
+
+export const CreateClient: React.FC<Props> = ({route}) => {
   const navigation = useNavigation() as DrawerNavigationProp<
     RootDrawerParamList,
     'CreateClient'
   >;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [idClient, setIdClient] = useState(0);
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [email, setEmail] = useState('');
-  const [cep, setCep] = useState('');
-  const [rua, setRua] = useState('');
-  const [numero, setNumero] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [uf, setUf] = useState('');
+  const editClient = route.params?.editClient;
 
-  if (editClient !== null) {
-    setIdClient(editClient.id);
-    setNome(editClient.nome);
-    setCpf(editClient.cpf);
-    setEmail(editClient.email);
-    setCep(editClient.endereco.cep);
-    setRua(editClient.endereco.rua);
-    setNumero(editClient.endereco.numero);
-    setBairro(editClient.endereco.bairro);
-    setCidade(editClient.endereco.cidade);
-    setUf(editClient.endereco.uf);
-  }
+  const [idClient, setIdClient] = useState(editClient ? editClient.id : 0);
+  const [nome, setNome] = useState(editClient ? editClient.nome : '');
+  const [cpf, setCpf] = useState(editClient ? editClient.cpf : '');
+  const [email, setEmail] = useState(editClient ? editClient.email : '');
+  const [cep, setCep] = useState(editClient ? editClient.endereco.cep : '');
+  const [rua, setRua] = useState(editClient ? editClient.endereco.rua : '');
+  const [numero, setNumero] = useState(
+    editClient ? editClient.endereco.numero : '',
+  );
+  const [bairro, setBairro] = useState(
+    editClient ? editClient.endereco.bairro : '',
+  );
+  const [cidade, setCidade] = useState(
+    editClient ? editClient.endereco.cidade : '',
+  );
+  const [uf, setUf] = useState(editClient ? editClient.endereco.uf : '');
+
+  const inputNome = useRef<TextInput>(null);
+  const inputCpf = useRef<TextInput>(null);
+  const inputEmail = useRef<TextInput>(null);
+  const inputCep = useRef<TextInput>(null);
+  const inputRua = useRef<TextInput>(null);
+  const inputNumero = useRef<TextInput>(null);
+  const inputBairro = useRef<TextInput>(null);
+  const inputCidade = useRef<TextInput>(null);
+  const inputUf = useRef<TextInput>(null);
 
   async function onBlurCep(text: string) {
     const cepInput = text?.replace(/[^0-9]/g, '');
@@ -152,6 +167,8 @@ export const CreateClient = (editClient: ResponseProps) => {
             style={styles.inputStyled}
             onChangeText={setNome}
             value={nome}
+            ref={inputNome}
+            onSubmitEditing={() => inputCpf.current?._inputElement?.focus()}
           />
           <Text style={styles.textStyled}>CPF: </Text>
           <TextInputMask
@@ -159,12 +176,16 @@ export const CreateClient = (editClient: ResponseProps) => {
             style={styles.inputStyled}
             onChangeText={setCpf}
             value={cpf}
+            ref={inputCpf}
+            onSubmitEditing={() => inputEmail.current?.focus()}
           />
           <Text style={styles.textStyled}>E-mail: </Text>
           <TextInput
             style={styles.inputStyled}
             onChangeText={setEmail}
             value={email}
+            ref={inputEmail}
+            onSubmitEditing={() => inputCep.current?._inputElement?.focus()}
           />
           <Text style={styles.textStyled}>CEP: </Text>
           <TextInputMask
@@ -173,36 +194,46 @@ export const CreateClient = (editClient: ResponseProps) => {
             onChangeText={setCep}
             value={cep}
             onEndEditing={e => onBlurCep(e.nativeEvent.text)}
+            ref={inputCep}
+            onSubmitEditing={() => inputNumero.current?.focus()}
           />
           <Text style={styles.textStyled}>Rua: </Text>
           <TextInput
             style={styles.inputStyled}
             onChangeText={setRua}
             value={rua || ''}
+            ref={inputRua}
+            onSubmitEditing={() => inputNumero.current?.focus()}
           />
           <Text style={styles.textStyled}>Número: </Text>
           <TextInput
             style={styles.inputStyled}
             onChangeText={setNumero}
             value={numero || ''}
+            ref={inputNumero}
           />
           <Text style={styles.textStyled}>Bairro: </Text>
           <TextInput
             style={styles.inputStyled}
             onChangeText={setBairro}
             value={bairro || ''}
+            ref={inputBairro}
+            onSubmitEditing={() => inputCidade.current?.focus()}
           />
           <Text style={styles.textStyled}>Cidade: </Text>
           <TextInput
             style={styles.inputStyled}
             onChangeText={setCidade}
             value={cidade || ''}
+            ref={inputCidade}
+            onSubmitEditing={() => inputUf.current?.focus()}
           />
           <Text style={styles.textStyled}>UF: </Text>
           <TextInput
             style={styles.inputStyled}
             onChangeText={setUf}
             value={uf || ''}
+            ref={inputUf}
           />
           <View style={styles.buttonStyled}>
             <Button
