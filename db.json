@@ -7,7 +7,7 @@
   ],
   "clientes": [
     {
-      "nome": "Maria Clara Stival Motão",
+      "nome": "Maria Clara Stival",
       "cpf": "047.652.974-89",
       "email": "mariaclara@gmail.com",
       "endereco": {
@@ -19,6 +19,34 @@
         "uf": "TO"
       },
       "id": 5
+    },
+    {
+      "nome": "Lucas Vieira Urquiza",
+      "cpf": "047.974.151-42",
+      "email": "urquizaxd@gmail.com",
+      "endereco": {
+        "cep": "75470-000",
+        "rua": "Avenida Otilia Amorim Rodrigues",
+        "numero": "S/N",
+        "bairro": "Setor Dim Dim",
+        "cidade": "Nova Veneza",
+        "uf": "GO"
+      },
+      "id": 6
+    },
+    {
+      "nome": "Fabricio de Oliveira Urquiza",
+      "cpf": "254.369.871-20",
+      "email": "fabriciourquiza@hotmail.com",
+      "endereco": {
+        "cep": "27910-390",
+        "rua": "Praça Irmão Ferreira Rabelo",
+        "numero": "209",
+        "bairro": "Centro",
+        "cidade": "Macaé",
+        "uf": "RJ"
+      },
+      "id": 7
     }
   ]
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,11 +8,12 @@ import {
   Button,
   ScrollView,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import Cep from '../../api/Cep';
 import Cliente from '../../api/Cliente';
 
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {
   DrawerNavigationProp,
   DrawerScreenProps,
@@ -57,6 +58,16 @@ export const CreateClient: React.FC<Props> = ({route}) => {
   );
   const [uf, setUf] = useState(editClient ? editClient.endereco.uf : '');
 
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    (() => {
+      if (!isFocused) {
+        clearForm();
+      }
+    })();
+  }, [isFocused]);
+
   const inputNome = useRef<TextInput>(null);
   const inputCpf = useRef<TextInput>(null);
   const inputEmail = useRef<TextInput>(null);
@@ -88,6 +99,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
   }
 
   const clearForm = () => {
+    setIdClient(0);
     setNome('');
     setCpf('');
     setEmail('');
@@ -140,17 +152,32 @@ export const CreateClient: React.FC<Props> = ({route}) => {
       showToastWithGravity('UF em Branco');
       return;
     }
-    await Cliente.createCliente({
-      nome,
-      cpf,
-      email,
-      cep,
-      rua,
-      numero,
-      bairro,
-      cidade,
-      uf,
-    });
+    if (idClient !== 0) {
+      await Cliente.putClient({
+        id: idClient,
+        nome,
+        cpf,
+        email,
+        cep,
+        rua,
+        numero,
+        bairro,
+        cidade,
+        uf,
+      });
+    } else {
+      await Cliente.createCliente({
+        nome,
+        cpf,
+        email,
+        cep,
+        rua,
+        numero,
+        bairro,
+        cidade,
+        uf,
+      });
+    }
     clearForm();
   };
 
@@ -236,11 +263,16 @@ export const CreateClient: React.FC<Props> = ({route}) => {
             ref={inputUf}
           />
           <View style={styles.buttonStyled}>
-            <Button
-              onPress={() => handleSubmit()}
-              title="Criar"
-              accessibilityLabel="Learn more about this purple button"
-            />
+            <TouchableOpacity
+              style={[styles.button, {backgroundColor: '#B2FFB2'}]}
+              onPress={() => handleSubmit()}>
+              <Text style={styles.textStyled}>Criar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, {backgroundColor: '#FFB2B2'}]}
+              onPress={() => clearForm()}>
+              <Text style={styles.textStyled}>Limpar</Text>
+            </TouchableOpacity>
           </View>
         </Container>
       </ScrollView>
@@ -264,5 +296,20 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 5,
     marginBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    alignSelf: 'center',
+    width: '80%',
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    width: '40%',
+    borderRadius: 5,
+  },
+  styledText: {
+    fontWeight: 'bold',
   },
 });

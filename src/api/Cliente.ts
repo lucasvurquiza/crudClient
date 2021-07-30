@@ -2,6 +2,7 @@ import {api, source} from '../utils/axios';
 import {showToastWithGravity} from '../utils/notifications/showToast';
 
 type ClienteProps = {
+  id?: number;
   nome: string;
   cpf: string;
   email: string;
@@ -84,6 +85,42 @@ class Cliente {
       })
       .catch(() => {
         showToastWithGravity('Houve um erro ao deletar o Cliente');
+        return null;
+      });
+  }
+
+  async putClient({
+    id,
+    nome,
+    cpf,
+    email,
+    cep,
+    rua,
+    numero,
+    bairro,
+    cidade,
+    uf,
+  }: ClienteProps) {
+    var cliente = {
+      nome: nome,
+      cpf: cpf,
+      email: email,
+      endereco: {
+        cep: cep,
+        rua: rua,
+        numero: numero,
+        bairro: bairro,
+        cidade: cidade,
+        uf: uf,
+      },
+    };
+    api
+      .put(`/clientes/${id}`, cliente)
+      .then(function () {
+        showToastWithGravity(`O Cliente: ${nome} foi alterado com sucesso`);
+      })
+      .catch(function (error) {
+        console.log(error);
         return null;
       });
   }
