@@ -17,13 +17,18 @@ import {TextInputMask} from 'react-native-masked-text';
 import {RootDrawerParamList} from '../../routes';
 import {Header} from '../../components/Header';
 import {Container} from '../../style/Container';
+import {showToastWithGravity} from '../../utils/notifications/showToast';
+import {isEmail} from '../../utils/validates/emailValidation';
+import {ResponseProps} from '../ListClients';
 
-export const CreateClient = () => {
+export const CreateClient = (editClient: ResponseProps) => {
   const navigation = useNavigation() as DrawerNavigationProp<
     RootDrawerParamList,
     'CreateClient'
   >;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [idClient, setIdClient] = useState(0);
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
@@ -33,6 +38,19 @@ export const CreateClient = () => {
   const [bairro, setBairro] = useState('');
   const [cidade, setCidade] = useState('');
   const [uf, setUf] = useState('');
+
+  if (editClient !== null) {
+    setIdClient(editClient.id);
+    setNome(editClient.nome);
+    setCpf(editClient.cpf);
+    setEmail(editClient.email);
+    setCep(editClient.endereco.cep);
+    setRua(editClient.endereco.rua);
+    setNumero(editClient.endereco.numero);
+    setBairro(editClient.endereco.bairro);
+    setCidade(editClient.endereco.cidade);
+    setUf(editClient.endereco.uf);
+  }
 
   async function onBlurCep(text: string) {
     const cepInput = text?.replace(/[^0-9]/g, '');
@@ -67,6 +85,46 @@ export const CreateClient = () => {
   };
 
   const handleSubmit = async () => {
+    if (!nome.trim()) {
+      showToastWithGravity('Nome em Branco');
+      return;
+    }
+    if (!cpf.trim()) {
+      showToastWithGravity('CPF em Branco');
+      return;
+    }
+    if (!email.trim()) {
+      showToastWithGravity('E-mail em Branco');
+      return;
+    }
+    if (!isEmail(email)) {
+      showToastWithGravity('E-mail Inválido');
+      return;
+    }
+    if (!cep.trim()) {
+      showToastWithGravity('CEP em Branco');
+      return;
+    }
+    if (!rua.trim()) {
+      showToastWithGravity('Rua em Branco');
+      return;
+    }
+    if (!numero.trim()) {
+      showToastWithGravity('Número em Branco');
+      return;
+    }
+    if (!bairro.trim()) {
+      showToastWithGravity('Bairro em Branco');
+      return;
+    }
+    if (!cidade.trim()) {
+      showToastWithGravity('Cidade em Branco');
+      return;
+    }
+    if (!uf.trim()) {
+      showToastWithGravity('UF em Branco');
+      return;
+    }
     await Cliente.createCliente({
       nome,
       cpf,

@@ -7,62 +7,6 @@
   ],
   "clientes": [
     {
-      "nome": "Lucas Vieira Urquiza",
-      "cpf": "047.974.151-42",
-      "email": "urquizaxd@gmail.com",
-      "endereco": {
-        "cep": "75470-000",
-        "rua": "Avenida Otilia Amorim Rodrigues",
-        "numero": "S/N",
-        "bairro": "Setor Dim Dim",
-        "cidade": "Nova Veneza",
-        "uf": "GO"
-      },
-      "id": 1
-    },
-    {
-      "nome": "Luciene Aparecida Vieira Urquiza",
-      "cpf": "577.049.451-49",
-      "email": "lucieneurquiza@gmail.com",
-      "endereco": {
-        "cep": "77410-420",
-        "rua": "Rua 21-C",
-        "numero": "265",
-        "bairro": "Alto dos Buritis",
-        "cidade": "Gurupi",
-        "uf": "TO"
-      },
-      "id": 2
-    },
-    {
-      "nome": "Fabricio de Oliveira Urquiza",
-      "cpf": "151.051.987-87",
-      "email": "fabriciourquiza@gmail.com",
-      "endereco": {
-        "cep": "51300-390",
-        "rua": "Rua Padre Romeu Peréa",
-        "numero": "001",
-        "bairro": "COHAB",
-        "cidade": "Recife",
-        "uf": "PE"
-      },
-      "id": 3
-    },
-    {
-      "nome": "Arthur Vieira Urquiza",
-      "cpf": "854.987.150-98",
-      "email": "arthururquiza@gmail.com",
-      "endereco": {
-        "cep": "69088-494",
-        "rua": "Rua Rômulo",
-        "numero": "S/N",
-        "bairro": "Jorge Teixeira",
-        "cidade": "Manaus",
-        "uf": "AM"
-      },
-      "id": 4
-    },
-    {
       "nome": "Maria Clara Stival Motão",
       "cpf": "047.652.974-89",
       "email": "mariaclara@gmail.com",
@@ -77,18 +21,18 @@
       "id": 5
     },
     {
-      "nome": "João Pedro Petigru",
-      "cpf": "254.987.321-02",
-      "email": "joaopedro@petigru.com",
+      "nome": "Marcos Paulo Mariano",
+      "cpf": "542.398.103-24",
+      "email": "marcospaulo@mariano.com",
       "endereco": {
-        "cep": "75470-000",
-        "rua": "Berlindo Morais",
-        "numero": "S/N",
-        "bairro": "Setor Sul",
-        "cidade": "Nova Veneza",
-        "uf": "GO"
+        "cep": "57022-160",
+        "rua": "Praça Dois Leões",
+        "numero": "965",
+        "bairro": "Jaraguá",
+        "cidade": "Maceió",
+        "uf": "AL"
       },
-      "id": 6
+      "id": 7
     }
   ]
 }

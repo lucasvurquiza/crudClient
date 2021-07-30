@@ -1,4 +1,5 @@
 import {api, source} from '../utils/axios';
+import {showToastWithGravity} from '../utils/notifications/showToast';
 
 type ClienteProps = {
   nome: string;
@@ -39,7 +40,7 @@ class Cliente {
         },
       })
       .then(function () {
-        console.log('Cadastrado com Sucesso');
+        showToastWithGravity('Cliente cadastrado com sucesso');
       })
       .catch(function (error) {
         console.log(error);
@@ -56,7 +57,7 @@ class Cliente {
         return response.data;
       })
       .catch(() => {
-        console.log('Deu ruim');
+        showToastWithGravity('Houve um erro ao carregar a lista de Clientes');
         return null;
       });
   }
@@ -70,7 +71,19 @@ class Cliente {
         return response.data;
       })
       .catch(() => {
-        console.log('Deu ruim');
+        showToastWithGravity('Houve um erro ao buscar o Cliente');
+        return null;
+      });
+  }
+
+  async deleteClient(idCliente: number) {
+    return api
+      .delete(`/clientes/${idCliente}`)
+      .then(async () => {
+        showToastWithGravity('Cliente apagado com Sucesso');
+      })
+      .catch(() => {
+        showToastWithGravity('Houve um erro ao deletar o Cliente');
         return null;
       });
   }

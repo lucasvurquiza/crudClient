@@ -8,6 +8,7 @@ import {Table} from '../../components/Table';
 import Cliente from '../../api/Cliente';
 import {Container} from '../../style/Container';
 import {Searchbar} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export type ResponseProps = {
   nome: string;
@@ -48,6 +49,11 @@ export const ListClients = () => {
     setLoadClientes(response);
   };
 
+  const fetchAllCliente = async () => {
+    const response = await Cliente.getAllClientes();
+    setLoadClientes(response);
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -57,12 +63,23 @@ export const ListClients = () => {
             onPress={() => navigation.openDrawer()}
           />
           <View style={styles.viewStyled}>
-            <Searchbar
-              placeholder="Search"
-              onChangeText={query => setSearchQuery(query)}
-              onEndEditing={() => searchWithName()}
-              value={searchQuery}
-            />
+            <View style={styles.searchAndRefresh}>
+              <Searchbar
+                placeholder="Search"
+                onChangeText={query => setSearchQuery(query)}
+                onEndEditing={() => searchWithName()}
+                onIconPress={() => searchWithName()}
+                style={styles.searchbarStyled}
+                value={searchQuery}
+              />
+              <Icon.Button
+                name="refresh"
+                size={20}
+                color="#000"
+                backgroundColor={'transparent'}
+                onPress={() => fetchAllCliente()}
+              />
+            </View>
             <Table listClients={loadClientes} />
           </View>
         </Container>
@@ -75,5 +92,15 @@ const styles = StyleSheet.create({
   viewStyled: {
     marginLeft: 5,
     marginRight: 5,
+  },
+  searchAndRefresh: {
+    marginLeft: 5,
+    marginRight: 5,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchbarStyled: {
+    width: '90%',
   },
 });
