@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
@@ -9,6 +9,7 @@ import Cliente from '../../api/Cliente';
 import {Container} from '../../style/Container';
 import {Searchbar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {LoginContext} from '../../context/Login/LoginContext';
 
 export type ResponseProps = {
   nome: string;
@@ -26,6 +27,7 @@ export type ResponseProps = {
 };
 
 export const ListClients = () => {
+  const {setLoading} = useContext(LoginContext);
   const [loadClientes, setLoadClientes] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -38,8 +40,10 @@ export const ListClients = () => {
 
   useEffect(() => {
     const fetchAllCliente = async () => {
+      setLoading(true);
       const response = await Cliente.getAllClientes();
       setLoadClientes(response);
+      setLoading(false);
     };
     fetchAllCliente();
   }, [isFocused]);
@@ -59,7 +63,7 @@ export const ListClients = () => {
       <ScrollView>
         <Container>
           <Header
-            title="Listar Cliente"
+            title="Lista de Clientes"
             onPress={() => navigation.openDrawer()}
           />
           <View style={styles.viewStyled}>

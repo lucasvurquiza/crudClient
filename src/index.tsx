@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {DrawerNavigation} from './routes';
 import {LogBox} from 'react-native';
+import {LoginProvider} from './context/Login/LoginProvider';
 // import {AuthStack} from './routes/authNavigation';
 
 export const App = () => {
@@ -9,7 +10,9 @@ export const App = () => {
 
   return (
     <NavigationContainer>
-      <DrawerNavigation />
+      <LoginProvider>
+        <DrawerNavigation />
+      </LoginProvider>
     </NavigationContainer>
   );
 };

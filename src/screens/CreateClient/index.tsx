@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Text,
   TextInput,
   StyleSheet,
-  Button,
   ScrollView,
   View,
   TouchableOpacity,
@@ -26,6 +24,7 @@ import {showToastWithGravity} from '../../utils/notifications/showToast';
 import {isEmail} from '../../utils/validates/emailValidation';
 import {ResponseProps} from '../ListClients';
 import {useRef} from 'react';
+import {LoginContext} from '../../context/Login/LoginContext';
 
 type RootStackParamList = {
   ClientDetails: {editClient: ResponseProps};
@@ -34,6 +33,7 @@ type RootStackParamList = {
 type Props = DrawerScreenProps<RootStackParamList, 'ClientDetails'>;
 
 export const CreateClient: React.FC<Props> = ({route}) => {
+  const {setLoading} = useContext(LoginContext);
   const navigation = useNavigation() as DrawerNavigationProp<
     RootDrawerParamList,
     'CreateClient'
@@ -63,6 +63,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
   useEffect(() => {
     (() => {
       if (!isFocused) {
+        setLoading(false);
         clearForm();
       }
     })();
@@ -153,6 +154,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
       return;
     }
     if (idClient !== 0) {
+      setLoading(true);
       await Cliente.putClient({
         id: idClient,
         nome,
@@ -165,7 +167,9 @@ export const CreateClient: React.FC<Props> = ({route}) => {
         cidade,
         uf,
       });
+      setLoading(false);
     } else {
+      setLoading(true);
       await Cliente.createCliente({
         nome,
         cpf,
@@ -177,6 +181,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
         cidade,
         uf,
       });
+      setLoading(false);
     }
     clearForm();
   };
@@ -186,7 +191,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
       <ScrollView>
         <Container>
           <Header
-            title="Criar Cliente"
+            title="Adicionar Cliente"
             onPress={() => navigation.openDrawer()}
           />
           <Text style={styles.textStyled}>Nome: </Text>

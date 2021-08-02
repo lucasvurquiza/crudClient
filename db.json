@@ -47,6 +47,20 @@
         "uf": "RJ"
       },
       "id": 7
+    },
+    {
+      "nome": "Luciene Aparecida Vieira Urquiza",
+      "cpf": "577.049.451-49",
+      "email": "lucieneurquiza@hotmail.com",
+      "endereco": {
+        "cep": "75470-000",
+        "rua": "Avenida Otilia Amorim Rodrigues",
+        "numero": "S/N",
+        "bairro": "Setor Dim Dim",
+        "cidade": "Nova Veneza",
+        "uf": "GO"
+      },
+      "id": 8
     }
   ]
 }
