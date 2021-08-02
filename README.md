@@ -57,3 +57,29 @@
 ### Depois em outro terminal execute:
 
 #### `npx react-native run-android`
+
+
+
+### Prints da Aplicação
+
+#### Tela de Login
+
+<img src="img/TelaLogin.png" alt="Tela de Login" style="zoom:70%; border-radius: 25px;" />
+
+
+
+#### Tela de Listagem de Cliente
+
+<img src="img/TelaListagemClientes.png" alt="Tela de Login" style="zoom:70%; border-radius: 25px;" />
+
+
+
+#### Tela de Adicionar Clientes
+
+<img src="img/TelaAdicionarClientes.png" alt="Tela de Login" style="zoom:70%; border-radius: 25px;" />
+
+
+
+#### Drawer
+
+<img src="img/Drawer.png" alt="Tela de Login" style="zoom:70%; border-radius: 25px;" />
