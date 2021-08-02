@@ -46,6 +46,7 @@ export const ListClients = () => {
       setLoading(false);
     };
     fetchAllCliente();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
   const searchWithName = async () => {

@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
-  Text,
   TextInput,
   StyleSheet,
   ScrollView,
@@ -16,7 +15,6 @@ import {
   DrawerNavigationProp,
   DrawerScreenProps,
 } from '@react-navigation/drawer';
-import {TextInputMask} from 'react-native-masked-text';
 import {RootDrawerParamList} from '../../routes';
 import {Header} from '../../components/Header';
 import {Container} from '../../style/Container';
@@ -25,6 +23,8 @@ import {isEmail} from '../../utils/validates/emailValidation';
 import {ResponseProps} from '../ListClients';
 import {useRef} from 'react';
 import {LoginContext} from '../../context/Login/LoginContext';
+import {InputStyled, InputStyledMask} from '../../components/InputStyled';
+import {TextStyled} from '../../components/TextStyled';
 
 type RootStackParamList = {
   ClientDetails: {editClient: ResponseProps};
@@ -67,6 +67,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
         clearForm();
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
   const inputNome = useRef<TextInput>(null);
@@ -194,89 +195,78 @@ export const CreateClient: React.FC<Props> = ({route}) => {
             title="Adicionar Cliente"
             onPress={() => navigation.openDrawer()}
           />
-          <Text style={styles.textStyled}>Nome: </Text>
-          <TextInput
-            style={styles.inputStyled}
+          <TextStyled>Nome: </TextStyled>
+          <InputStyled
             onChangeText={setNome}
             value={nome}
             ref={inputNome}
             onSubmitEditing={() => inputCpf.current?._inputElement?.focus()}
           />
-          <Text style={styles.textStyled}>CPF: </Text>
-          <TextInputMask
+          <TextStyled>CPF: </TextStyled>
+          <InputStyledMask
             type={'cpf'}
-            style={styles.inputStyled}
             onChangeText={setCpf}
             value={cpf}
             ref={inputCpf}
             onSubmitEditing={() => inputEmail.current?.focus()}
           />
-          <Text style={styles.textStyled}>E-mail: </Text>
-          <TextInput
-            style={styles.inputStyled}
+          <TextStyled>E-mail: </TextStyled>
+          <InputStyled
             onChangeText={setEmail}
             value={email}
             ref={inputEmail}
             onSubmitEditing={() => inputCep.current?._inputElement?.focus()}
           />
-          <Text style={styles.textStyled}>CEP: </Text>
-          <TextInputMask
+          <TextStyled>CEP: </TextStyled>
+          <InputStyledMask
             type={'zip-code'}
-            style={styles.inputStyled}
             onChangeText={setCep}
             value={cep}
             onEndEditing={e => onBlurCep(e.nativeEvent.text)}
             ref={inputCep}
             onSubmitEditing={() => inputNumero.current?.focus()}
           />
-          <Text style={styles.textStyled}>Rua: </Text>
-          <TextInput
-            style={styles.inputStyled}
+          <TextStyled>Rua: </TextStyled>
+          <InputStyled
             onChangeText={setRua}
             value={rua || ''}
             ref={inputRua}
             onSubmitEditing={() => inputNumero.current?.focus()}
           />
-          <Text style={styles.textStyled}>Número: </Text>
-          <TextInput
-            style={styles.inputStyled}
+          <TextStyled>Número: </TextStyled>
+          <InputStyled
             onChangeText={setNumero}
             value={numero || ''}
             ref={inputNumero}
           />
-          <Text style={styles.textStyled}>Bairro: </Text>
-          <TextInput
-            style={styles.inputStyled}
+          <TextStyled>Bairro: </TextStyled>
+          <InputStyled
             onChangeText={setBairro}
             value={bairro || ''}
             ref={inputBairro}
             onSubmitEditing={() => inputCidade.current?.focus()}
           />
-          <Text style={styles.textStyled}>Cidade: </Text>
-          <TextInput
-            style={styles.inputStyled}
+          <TextStyled>Cidade: </TextStyled>
+          <InputStyled
             onChangeText={setCidade}
             value={cidade || ''}
             ref={inputCidade}
             onSubmitEditing={() => inputUf.current?.focus()}
           />
-          <Text style={styles.textStyled}>UF: </Text>
-          <TextInput
-            style={styles.inputStyled}
-            onChangeText={setUf}
-            value={uf || ''}
-            ref={inputUf}
-          />
-          <View style={styles.buttonStyled}>
+          <TextStyled>UF: </TextStyled>
+          <InputStyled onChangeText={setUf} value={uf || ''} ref={inputUf} />
+          <View style={styles.containerButtons}>
             <TouchableOpacity
+              // eslint-disable-next-line react-native/no-inline-styles
               style={[styles.button, {backgroundColor: '#B2FFB2'}]}
               onPress={() => handleSubmit()}>
-              <Text style={styles.textStyled}>Criar</Text>
+              <TextStyled style={styles.styledText}>Criar</TextStyled>
             </TouchableOpacity>
             <TouchableOpacity
+              // eslint-disable-next-line react-native/no-inline-styles
               style={[styles.button, {backgroundColor: '#FFB2B2'}]}
               onPress={() => clearForm()}>
-              <Text style={styles.textStyled}>Limpar</Text>
+              <TextStyled style={styles.styledText}>Limpar</TextStyled>
             </TouchableOpacity>
           </View>
         </Container>
@@ -286,17 +276,7 @@ export const CreateClient: React.FC<Props> = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-  inputStyled: {
-    borderBottomWidth: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 8,
-  },
-  textStyled: {
-    marginLeft: 5,
-    fontSize: 18,
-  },
-  buttonStyled: {
+  containerButtons: {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,

@@ -2,13 +2,14 @@ import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
+  DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import React, {useContext} from 'react';
 import {LoginContext} from '../../context/Login/LoginContext';
 import {onSignOut} from '../../services/auth';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export const SignoutButton = props => {
+export const SignoutButton = (props: DrawerContentComponentProps) => {
   const {setIsLogin, isLogin} = useContext(LoginContext);
 
   const onSignOutApp = () => {
@@ -28,6 +29,7 @@ export const SignoutButton = props => {
         icon={({color, size}) => (
           <Icon color={color} size={size} name={'logout'} />
         )}
+        inactiveBackgroundColor={'#FFCCCC'}
       />
     </DrawerContentScrollView>
   );

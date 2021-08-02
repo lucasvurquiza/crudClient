@@ -45,21 +45,23 @@ export const DrawerNavigation = () => {
       ) : (
         <React.Fragment>
           <Drawer.Screen
-            name="Lista de Clientes"
+            name="ListClients"
             component={ListClients}
             options={{
               drawerIcon: ({color, size}) => (
                 <Icon color={color} size={size} name={'format-list-bulleted'} />
               ),
+              drawerLabel: 'Lista de Clientes',
             }}
           />
           <Drawer.Screen
-            name="Adicionar Cliente"
+            name="CreateClient"
             component={CreateClient}
             options={{
               drawerIcon: ({color, size}) => (
                 <Icon color={color} size={size} name={'add'} />
               ),
+              drawerLabel: 'Adicionar Cliente',
             }}
           />
         </React.Fragment>

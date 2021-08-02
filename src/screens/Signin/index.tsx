@@ -1,19 +1,15 @@
 import React, {useRef, useState} from 'react';
 import {useContext} from 'react';
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import {View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import {LoginContext} from '../../context/Login/LoginContext';
 import Login from '../../api/Login';
 import {showToastWithGravity} from '../../utils/notifications/showToast';
 import {isEmail} from '../../utils/validates/emailValidation';
 import {onSignIn} from '../../services/auth';
+import {InputStyled} from '../../components/InputStyled';
+import {TextStyled} from '../../components/TextStyled';
 
-export const Signin: React.FC = ({navigation}) => {
+export const Signin: React.FC = () => {
   const {setIsLogin, isLogin, setLoading} = useContext(LoginContext);
 
   const [email, setEmail] = useState('');
@@ -46,24 +42,23 @@ export const Signin: React.FC = ({navigation}) => {
   return (
     <View style={styles.content}>
       <View style={styles.form}>
-        <Text style={styles.textStyled}>E-mail: </Text>
-        <TextInput
-          style={styles.inputStyled}
+        <TextStyled>E-mail: </TextStyled>
+        <InputStyled
           onChangeText={setEmail}
           value={email || ''}
           ref={inputEmail}
+          onSubmitEditing={() => inputPassword.current?.focus()}
         />
-        <Text style={styles.textStyled}>Password: </Text>
-        <TextInput
-          style={styles.inputStyled}
+        <TextStyled>Password: </TextStyled>
+        <InputStyled
           onChangeText={setPassword}
           value={password || ''}
           ref={inputPassword}
           secureTextEntry={true}
         />
-        <View style={styles.buttonStyled}>
+        <View style={styles.containerButtons}>
           <TouchableOpacity style={styles.button} onPress={() => onSignInApp()}>
-            <Text style={styles.styledText}>Login</Text>
+            <TextStyled style={styles.styledText}>Login</TextStyled>
           </TouchableOpacity>
         </View>
       </View>
@@ -80,17 +75,7 @@ const styles = StyleSheet.create({
   form: {
     width: '100%',
   },
-  inputStyled: {
-    borderBottomWidth: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 8,
-  },
-  textStyled: {
-    marginLeft: 5,
-    fontSize: 18,
-  },
-  buttonStyled: {
+  containerButtons: {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
