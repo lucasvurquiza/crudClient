@@ -58,9 +58,8 @@
 
 #### `npx react-native run-android`
 
-
-
-
+<br/>
+<br/>
 
 ### Prints da Aplicação
 
